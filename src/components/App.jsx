@@ -2,7 +2,6 @@ import { useState } from 'react';
 import NoTodos from './NoTodos';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
-import '../App.css';
 
 function App() {
   const [todos, setTodos] = useState([
@@ -114,8 +113,8 @@ function App() {
 
   return (
     <div>
-      <div>
-        <h2>Todo App</h2>
+      <div className='container'>
+        <h1 className='app-title'>Todo App</h1>
         <TodoForm addTodo={addTodo} />
 
         {todos.length > 0 ? (

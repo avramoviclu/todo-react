@@ -15,56 +15,56 @@ TodoList.propTypes = {
 function TodoList(props) {
   return (
     <>
-      <ul>
+      <ul className="list-group">
         {props.todos.map((todo, index) => (
-          <li key={todo.id}>
-            <div>
-              <input
-                type="checkbox"
-                onChange={() => props.completeTodo(todo.id)}
-                checked={todo.isComplete ? true : false}
-              />
+          <li key={todo.id} className="list-group-item">
+            <div className="row">
+              <div className="col-10">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    onChange={() => props.completeTodo(todo.id)}
+                    checked={todo.isComplete ? true : false}
+                  />
 
-              {!todo.isEditing ? (
-                <span
-                  onDoubleClick={() => props.markAsEditing(todo.id)}
-                  className={`todo-item-label ${
-                    todo.isComplete ? 'line-through' : ''
-                  }`}
-                >
-                  {todo.title}
-                </span>
-              ) : (
-                <input
-                  type="text"
-                  onBlur={event => props.updateTodo(event, todo.id)}
-                  onKeyDown={event => {
-                    if (event.key === 'Enter') {
-                      props.updateTodo(event, todo.id);
-                    } else if (event.key === 'Escape') {
-                      props.cancelEdit(event, todo.id);
-                    }
-                  }}
-                  defaultValue={todo.title}
-                  autoFocus
-                />
-              )}
+                  {!todo.isEditing ? (
+                    <p
+                      onDoubleClick={() => props.markAsEditing(todo.id)}
+                      className={todo.isComplete ? 'line-through' : ''}
+                    >
+                      {todo.title}
+                    </p>
+                  ) : (
+                    <input
+                      type="text"
+                      className="form-control"
+                      onBlur={event => props.updateTodo(event, todo.id)}
+                      onKeyDown={event => {
+                        if (event.key === 'Enter') {
+                          props.updateTodo(event, todo.id);
+                        } else if (event.key === 'Escape') {
+                          props.cancelEdit(event, todo.id);
+                        }
+                      }}
+                      defaultValue={todo.title}
+                      autoFocus
+                    />
+                  )}
+                </div>
+              </div>
+              <div className="col-2">
+                <button type="button" class="btn-close delete" aria-label="Close" onClick={() => props.deleteTodo(todo.id)}></button>
+              </div>
             </div>
-            <button
-              onClick={() => props.deleteTodo(todo.id)}
-            >
-            </button>
           </li>
         ))}
       </ul>
 
       <div>
-        <div>
-          <button onClick={props.completeAllTodos} >Check All</button>
-        </div>
-
-        <span>{props.remaining()} items remaining</span>
+        <button type="button" onClick={props.completeAllTodos} className="btn btn-secondary check-all">Check All</button>
       </div>
+      <span>{props.remaining()} items remaining</span>
     </>
   );
 }

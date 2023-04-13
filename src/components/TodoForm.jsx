@@ -25,12 +25,12 @@ function TodoForm(props) {
   }
 
   return (
-    <form action="#" onSubmit={handleSubmit}>
+    <form action="#" onSubmit={handleSubmit} className="todo-input">
       <input
+        className="form-control"
         type="text"
         value={todoInput}
         onChange={handleInput}
-        className="todo-input"
         placeholder="What do you need to do?"
       />
     </form>
